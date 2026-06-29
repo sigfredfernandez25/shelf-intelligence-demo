@@ -1,0 +1,487 @@
+/* Mobile Application Styles */
+
+.mobile-app {
+  max-width: 375px;
+  margin: 0 auto;
+  background: var(--neutral-light);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+}
+
+.mobile-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 20px 20px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.mobile-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mobile-header h1 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.mobile-header-info {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.notification-badge {
+  background: var(--danger);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mobile-nav {
+  display: flex;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.mobile-nav-item {
+  flex: 1;
+  padding: 16px 12px;
+  text-align: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: var(--text-secondary);
+}
+
+.mobile-nav-item.active {
+  color: var(--primary);
+  background: rgba(37, 99, 235, 0.1);
+  border-bottom: 2px solid var(--primary);
+}
+
+.mobile-nav-item:hover {
+  background: var(--neutral-light);
+}
+
+.mobile-nav-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.mobile-nav-label {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.mobile-content {
+  padding: 20px;
+}
+
+.mobile-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.mobile-card-header {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.mobile-card-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.mobile-card-content {
+  padding: 20px;
+}
+
+/* Critical Alert Card */
+.critical-alert {
+  background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+  color: white;
+  animation: pulse-mobile 2s infinite;
+}
+
+@keyframes pulse-mobile {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.critical-alert .mobile-card-title {
+  color: white;
+}
+
+.critical-alert .mobile-card-subtitle {
+  color: rgba(255,255,255,0.9);
+}
+
+/* At-Risk Product Card */
+.at-risk-product {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.at-risk-product:last-child {
+  border-bottom: none;
+}
+
+.product-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--neutral);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.product-status {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.risk-indicator {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 60px;
+}
+
+.risk-critical {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.risk-high {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+/* Task Card */
+.task-card {
+  border-left: 4px solid var(--primary);
+}
+
+.task-priority {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.priority-critical {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.priority-high {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+.task-meta {
+  display: flex;
+  gap: 16px;
+  margin: 12px 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.task-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Mobile Buttons */
+.mobile-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mobile-btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.mobile-btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.mobile-btn-success {
+  background: var(--success);
+  color: white;
+}
+
+.mobile-btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+.mobile-btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+/* Progress Steps */
+.progress-steps {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.progress-step {
+  flex: 1;
+  height: 4px;
+  background: var(--neutral);
+  margin: 0 2px;
+}
+
+.progress-step.completed {
+  background: var(--success);
+}
+
+.progress-step.active {
+  background: var(--primary);
+}
+
+/* Quantity Input */
+.quantity-input {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--neutral-light);
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.quantity-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: white;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn:hover {
+  background: var(--neutral-light);
+}
+
+.quantity-display {
+  flex: 1;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Success Animation */
+.success-animation {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 32px;
+  color: white;
+  animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Substitution Flow */
+.substitution-flow {
+  text-align: center;
+  padding: 20px;
+}
+
+.substitution-arrow {
+  font-size: 32px;
+  color: var(--primary);
+  margin: 16px 0;
+  animation: bounceX 2s infinite;
+}
+
+@keyframes bounceX {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+.substitution-product {
+  padding: 16px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.substitution-from {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.substitution-to {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.substitution-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.substitution-stat {
+  text-align: center;
+  padding: 12px 8px;
+  background: var(--neutral-light);
+  border-radius: 8px;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--success);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Loading Overlay */
+.mobile-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.mobile-loading-card {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 280px;
+  width: 90%;
+}
+
+.mobile-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--neutral);
+  border-top: 3px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+/* Status Bar */
+.mobile-status-bar {
+  background: rgba(0,0,0,0.05);
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Back Button */
+.mobile-back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mobile-back-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
