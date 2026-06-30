@@ -3,15 +3,46 @@ import React, { useState } from 'react';
 const RecommendationPanel = ({ onGenerateTask }) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [showRecommendation, setShowRecommendation] = useState(false);
+  const [forecastData, setForecastData] = useState(null);
+  const [agentMetadata, setAgentMetadata] = useState(null);
 
   const handleGenerateRecommendation = async () => {
     setIsGenerating(true);
     
-    // Simulate AI processing time
-    setTimeout(() => {
-      setIsGenerating(false);
-      setShowRecommendation(true);
-    }, 2000);
+    try {
+      console.log('🤖 Calling Demand Forecast Agent...');
+      
+      const response = await fetch('/api/forecast', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          storeId: '102',
+          skuId: 'CHIPS_A'
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        setForecastData(result.forecast);
+        setAgentMetadata(result.metadata);
+        
+        console.log('✅ Forecast Agent Result:', result.forecast);
+        console.log('🤖 Agents executed:', result.metadata.agentsExecuted);
+        console.log('⏱️ Processing time:', result.metadata.executionTime + 'ms');
+        
+        setIsGenerating(false);
+        setShowRecommendation(true);
+      } else {
+        throw new Error('Forecast API failed');
+      }
+    } catch (error) {
+      console.error('❌ Forecast Agent Error:', error);
+      // Fallback to mock behavior
+      setTimeout(() => {
+        setIsGenerating(false);
+        setShowRecommendation(true);
+      }, 2000);
+    }
   };
 
   const handleAcceptRecommendation = () => {
@@ -52,9 +83,9 @@ const RecommendationPanel = ({ onGenerateTask }) => {
           <div className="loading" style={{ padding: '40px 20px' }}>
             <div className="loading-spinner"></div>
             <div>
-              <div style={{ fontWeight: '600', marginBottom: '4px' }}>AI Processing...</div>
+              <div style={{ fontWeight: '600', marginBottom: '4px' }}>🤖 Demand Forecast Agent Processing...</div>
               <div style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
-                Analyzing demand patterns, inventory levels, and promotion impact
+                Analyzing sales velocity, inventory levels, and promotion impact
               </div>
             </div>
           </div>
@@ -70,25 +101,41 @@ const RecommendationPanel = ({ onGenerateTask }) => {
               marginBottom: '16px'
             }}>
               <h4 style={{ color: 'var(--primary)', marginBottom: '8px' }}>
-                ✨ Recommended Action
+                ✨ AI Agent Recommendation
               </h4>
               <div style={{ fontSize: '16px', fontWeight: '600', marginBottom: '8px' }}>
-                Restock 20 units immediately
+                {forecastData?.recommendation || 'Restock 20 units immediately'}
               </div>
               <div style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
-                Based on demand velocity and promotion duration
+                Based on {forecastData ? `${forecastData.confidence}% confidence` : 'demand analysis'}
               </div>
             </div>
 
-            <div style={{ marginBottom: '16px' }}>
-              <h4>AI Reasoning</h4>
-              <div style={{ fontSize: '14px', marginTop: '8px', lineHeight: '1.6' }}>
-                • Current depletion rate: 17 units/hour<br/>
-                • Promotion continues for 48 hours<br/>
-                • 20 units ensures 3-hour safety buffer<br/>
-                • Optimal shelf capacity utilization: 85%
+            {forecastData && (
+              <div style={{ marginBottom: '16px' }}>
+                <h4>🧠 AI Analysis Results</h4>
+                <div style={{ fontSize: '14px', marginTop: '8px', lineHeight: '1.6' }}>
+                  • Sales velocity: {forecastData.salesVelocity} units/hour<br/>
+                  • Stockout prediction: {forecastData.runoutHours.toFixed(1)} hours<br/>
+                  • Risk level: <strong style={{ color: forecastData.riskLevel === 'CRITICAL' ? 'var(--danger)' : 'var(--warning)' }}>
+                    {forecastData.riskLevel}
+                  </strong><br/>
+                  • Expected loss: ${forecastData.expectedLoss}
+                </div>
               </div>
-            </div>
+            )}
+
+            {agentMetadata && (
+              <div style={{
+                background: 'rgba(34, 197, 94, 0.1)',
+                padding: '12px',
+                borderRadius: 'var(--radius)',
+                marginBottom: '16px',
+                fontSize: '12px'
+              }}>
+                🤖 <strong>Agent Metadata:</strong> {agentMetadata.agentsExecuted?.join(', ')} • {agentMetadata.executionTime}ms
+              </div>
+            )}
 
             <div style={{ 
               background: 'rgba(34, 197, 94, 0.1)', 
@@ -98,8 +145,8 @@ const RecommendationPanel = ({ onGenerateTask }) => {
             }}>
               <h4 style={{ color: 'var(--success)' }}>Expected Impact</h4>
               <div style={{ fontSize: '14px', marginTop: '8px' }}>
-                • Revenue protected: $1,280<br/>
-                • Stockout risk reduced: 96% → 5%<br/>
+                • Revenue protected: ${forecastData?.expectedLoss || 1280}<br/>
+                • Stockout risk reduced: {forecastData ? '96% → 5%' : '96% → 5%'}<br/>
                 • Customer satisfaction maintained
               </div>
             </div>

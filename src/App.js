@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import SKUDetail from './pages/SKUDetail';
+import AgentTester from './components/AgentTester';
 import MobileDashboard from './pages/mobile/MobileDashboard';
 import TaskDetail from './pages/mobile/TaskDetail';
 import SubstitutionScreen from './pages/mobile/SubstitutionScreen';
@@ -95,22 +96,26 @@ function App() {
           
           {activeView !== 'dashboard' && currentView === 'dashboard' && (
             <div style={{ padding: '32px' }}>
-              <div className="card">
-                <div className="card-content" style={{ textAlign: 'center', padding: '60px 40px' }}>
-                  <div style={{ fontSize: '48px', marginBottom: '20px' }}>🚧</div>
-                  <h2 style={{ marginBottom: '12px' }}>Feature Coming Soon</h2>
-                  <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
-                    This {activeView} section is being developed. 
-                    Try the main Dashboard for the complete demo experience.
-                  </p>
-                  <button 
-                    className="btn btn-primary"
-                    onClick={() => setActiveView('dashboard')}
-                  >
-                    Go to Dashboard
-                  </button>
+              {activeView === 'analytics' ? (
+                <AgentTester />
+              ) : (
+                <div className="card">
+                  <div className="card-content" style={{ textAlign: 'center', padding: '60px 40px' }}>
+                    <div style={{ fontSize: '48px', marginBottom: '20px' }}>🚧</div>
+                    <h2 style={{ marginBottom: '12px' }}>Feature Coming Soon</h2>
+                    <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
+                      This {activeView} section is being developed. 
+                      Try the main Dashboard for the complete demo experience.
+                    </p>
+                    <button 
+                      className="btn btn-primary"
+                      onClick={() => setActiveView('dashboard')}
+                    >
+                      Go to Dashboard
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>

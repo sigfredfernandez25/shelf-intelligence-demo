@@ -1,0 +1,761 @@
+openapi: 3.0.3
+info:
+  title: Shelf Intelligence Agent API
+  description: |
+    AI-powered retail inventory management and predictive replenishment system.
+    
+    This API provides intelligent agents for demand forecasting, replenishment optimization, 
+    product recommendations, planogram management, and task orchestration.
+    
+    **Agent Modules:**
+    - **Demand Forecast Agent**: Predicts stockout risk and sales velocity
+    - **Replenishment Agent**: Optimizes restocking quantities and timing
+    - **Recommendation Agent**: Finds optimal product substitutions
+    - **Planogram Agent**: Optimizes shelf space allocation
+    - **Task Orchestrator Agent**: Manages task creation and prioritization
+    
+    **Integration Options:**
+    - Direct API calls from your application
+    - Microsoft Copilot Studio REST API tools
+    - Azure AI Foundry OpenAPI function calling
+  version: 1.0.0
+  contact:
+    name: Shelf Intelligence Team
+    email: support@shelfintelligence.ai
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://your-domain.vercel.app
+    description: Production server
+  - url: http://localhost:3000
+    description: Development server
+
+paths:
+  /api/dashboard:
+    get:
+      summary: Get dashboard summary
+      description: |
+        Retrieves comprehensive store dashboard including KPIs, top risks, active tasks, and alerts.
+        Orchestrates multiple AI agents to provide real-time insights.
+      operationId: getDashboardSummary
+      parameters:
+        - name: storeId
+          in: query
+          description: Store identifier
+          required: false
+          schema:
+            type: string
+            default: "102"
+            example: "102"
+      responses:
+        '200':
+          description: Dashboard summary retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummary'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/forecast:
+    post:
+      summary: Forecast SKU stockout risk
+      description: |
+        Analyzes demand patterns and predicts stockout timing for a specific SKU.
+        Uses the Demand Forecast Agent to calculate sales velocity and risk levels.
+      operationId: forecastSkuRisk
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [storeId, skuId]
+              properties:
+                storeId:
+                  type: string
+                  description: Store identifier
+                  example: "102"
+                skuId:
+                  type: string
+                  description: Product SKU identifier
+                  example: "CHIPS_A"
+      responses:
+        '200':
+          description: Forecast generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  forecast:
+                    $ref: '#/components/schemas/ForecastOutput'
+                  metadata:
+                    $ref: '#/components/schemas/Metadata'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/recommend-substitute:
+    post:
+      summary: Recommend substitute product
+      description: |
+        Finds optimal substitute products when primary products are unavailable.
+        Uses the Recommendation Agent to analyze substitution matrices and calculate business impact.
+      operationId: recommendSubstitute
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [storeId, skuId]
+              properties:
+                storeId:
+                  type: string
+                  description: Store identifier
+                  example: "102"
+                skuId:
+                  type: string
+                  description: Original product SKU identifier
+                  example: "CHIPS_A"
+      responses:
+        '200':
+          description: Substitute recommendation generated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recommendation:
+                    $ref: '#/components/schemas/RecommendationOutput'
+                  metadata:
+                    $ref: '#/components/schemas/Metadata'
+
+  /api/create-task:
+    post:
+      summary: Create replenishment task
+      description: |
+        Creates a new task for store associates to execute.
+        Uses the Task Orchestrator Agent to prioritize and assign tasks.
+      operationId: createReplenishmentTask
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [storeId, skuId, action]
+              properties:
+                storeId:
+                  type: string
+                  description: Store identifier
+                  example: "102"
+                skuId:
+                  type: string
+                  description: Product SKU identifier
+                  example: "CHIPS_A"
+                action:
+                  type: string
+                  description: Action to perform
+                  enum: [restock, substitute, verify, planogram]
+                  example: "restock"
+                priority:
+                  type: string
+                  description: Task priority level
+                  enum: [Low, Medium, High, Critical]
+                  example: "High"
+                quantity:
+                  type: integer
+                  description: Quantity for restock tasks
+                  example: 20
+      responses:
+        '200':
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task:
+                    $ref: '#/components/schemas/TaskOutput'
+                  metadata:
+                    $ref: '#/components/schemas/Metadata'
+
+  /api/update-task:
+    post:
+      summary: Update task status
+      description: |
+        Updates the status of an existing task.
+        Tracks task progress and completion metrics.
+      operationId: updateTaskStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [taskId, status]
+              properties:
+                taskId:
+                  type: string
+                  description: Task identifier
+                  example: "T001"
+                status:
+                  type: string
+                  description: New task status
+                  enum: [pending, in-progress, completed, escalated]
+                  example: "completed"
+                notes:
+                  type: string
+                  description: Additional notes or comments
+                  example: "Task completed successfully with no issues"
+      responses:
+        '200':
+          description: Task updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task:
+                    $ref: '#/components/schemas/TaskOutput'
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /api/sku/{skuId}:
+    get:
+      summary: Get comprehensive SKU analysis
+      description: |
+        Retrieves complete analysis for a specific SKU including forecast, replenishment,
+        recommendations, planogram insights, and task history.
+        Orchestrates multiple agents for comprehensive product intelligence.
+      operationId: getSkuAnalysis
+      parameters:
+        - name: skuId
+          in: path
+          description: Product SKU identifier
+          required: true
+          schema:
+            type: string
+            example: "CHIPS_A"
+        - name: storeId
+          in: query
+          description: Store identifier
+          required: false
+          schema:
+            type: string
+            default: "102"
+            example: "102"
+      responses:
+        '200':
+          description: SKU analysis retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SKUAnalysis'
+
+  /api/planogram-insight:
+    post:
+      summary: Get planogram recommendations
+      description: |
+        Generates shelf space optimization recommendations based on risk levels and demand patterns.
+        Uses the Planogram Agent to analyze facing allocations and shelf efficiency.
+      operationId: getPlanogramInsight
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [storeId, skuId]
+              properties:
+                storeId:
+                  type: string
+                  description: Store identifier
+                  example: "102"
+                skuId:
+                  type: string
+                  description: Product SKU identifier
+                  example: "CHIPS_A"
+                riskLevel:
+                  type: string
+                  description: Current risk level for the SKU
+                  enum: [LOW, MEDIUM, HIGH, CRITICAL]
+                  example: "HIGH"
+      responses:
+        '200':
+          description: Planogram insight generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  planogramInsight:
+                    $ref: '#/components/schemas/PlanogramOutput'
+                  metadata:
+                    $ref: '#/components/schemas/Metadata'
+
+  /api/health:
+    get:
+      summary: Health check for all agents
+      description: |
+        Performs health checks on all AI agents and returns system status.
+        Useful for monitoring and alerting in production environments.
+      operationId: healthCheck
+      responses:
+        '200':
+          description: All agents healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        '206':
+          description: Some agents degraded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        '503':
+          description: System unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+
+components:
+  schemas:
+    DashboardSummary:
+      type: object
+      properties:
+        kpis:
+          $ref: '#/components/schemas/KPIs'
+        topRisks:
+          type: array
+          items:
+            $ref: '#/components/schemas/StockRisk'
+        activeTasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alert'
+        timestamp:
+          type: string
+          format: date-time
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    KPIs:
+      type: object
+      properties:
+        atRiskSKUs:
+          type: integer
+          description: Number of SKUs at risk of stockout
+          example: 12
+        revenueProtected:
+          type: number
+          description: Revenue protected by AI recommendations
+          example: 15680
+        tasksPending:
+          type: integer
+          description: Number of pending tasks
+          example: 8
+        stockoutPredictions:
+          type: integer
+          description: Active stockout predictions
+          example: 15
+        forecastAccuracy:
+          type: number
+          description: AI forecast accuracy percentage
+          example: 94.5
+        oosRate:
+          type: number
+          description: Out-of-stock rate percentage
+          example: 2.3
+        marginImpact:
+          type: number
+          description: Estimated margin impact in dollars
+          example: 1250
+
+    StockRisk:
+      type: object
+      properties:
+        sku:
+          type: string
+          example: "CHIPS_A"
+        store:
+          type: string
+          example: "102"
+        product:
+          type: string
+          example: "Chips A"
+        currentStock:
+          type: integer
+          example: 34
+        forecast:
+          type: string
+          example: "Stockout in 2h"
+        riskLevel:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, CRITICAL]
+          example: "CRITICAL"
+        timeRemaining:
+          type: string
+          example: "2h 15m"
+        recommendedAction:
+          type: string
+          example: "Restock 20 units"
+        status:
+          type: string
+          example: "pending"
+        confidence:
+          type: number
+          example: 96
+        expectedLoss:
+          type: number
+          example: 1280
+        salesIncrease:
+          type: number
+          example: 65
+
+    ForecastOutput:
+      type: object
+      properties:
+        skuId:
+          type: string
+          example: "CHIPS_A"
+        storeId:
+          type: string
+          example: "102"
+        salesVelocity:
+          type: number
+          description: Units per hour
+          example: 17.5
+        runoutHours:
+          type: number
+          description: Hours until stockout
+          example: 2.15
+        riskLevel:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, CRITICAL]
+          example: "CRITICAL"
+        confidence:
+          type: number
+          description: Prediction confidence percentage
+          example: 96
+        expectedLoss:
+          type: number
+          description: Expected revenue loss in dollars
+          example: 1280
+        recommendation:
+          type: string
+          example: "URGENT: Restock immediately. Only 2h remaining at current velocity."
+
+    RecommendationOutput:
+      type: object
+      properties:
+        substituteSKU:
+          type: string
+          example: "CHIPS_B"
+        substituteName:
+          type: string
+          example: "Chips B"
+        acceptanceRate:
+          type: number
+          description: Customer acceptance percentage
+          example: 78
+        marginImpact:
+          type: number
+          description: Margin impact percentage
+          example: 10
+        expectedRecovery:
+          type: number
+          description: Revenue recovery percentage
+          example: 85
+        reason:
+          type: string
+          example: "Same brand family with higher margin and similar taste profile"
+
+    PlanogramOutput:
+      type: object
+      properties:
+        currentFacings:
+          type: integer
+          example: 4
+        recommendedFacings:
+          type: integer
+          example: 6
+        reasoning:
+          type: string
+          example: "Increase to 6 facings, high stockout risk requires increased shelf presence"
+        shelfOptimization:
+          type: string
+          example: "Add 2 facings for increased visibility. Position promotional units at eye level for maximum impact."
+
+    TaskOutput:
+      type: object
+      properties:
+        taskId:
+          type: string
+          example: "T001"
+        status:
+          type: string
+          enum: [created, updated, error]
+          example: "created"
+        message:
+          type: string
+          example: "Task T001 created successfully: Restock Chips A"
+
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "T001"
+        title:
+          type: string
+          example: "Restock Chips A"
+        priority:
+          type: string
+          enum: [Low, Medium, High, Critical]
+          example: "Critical"
+        assignee:
+          type: string
+          example: "John D."
+        estimatedTime:
+          type: string
+          example: "15 min"
+        location:
+          type: string
+          example: "Aisle 3, Section A"
+        instructions:
+          type: string
+          example: "Move 20 units from backroom to shelf. Update planogram display."
+        status:
+          type: string
+          enum: [pending, in-progress, completed, escalated]
+          example: "pending"
+        sku:
+          type: string
+          example: "CHIPS_A"
+        quantity:
+          type: integer
+          example: 20
+        type:
+          type: string
+          enum: [restock, verification, substitution, planogram]
+          example: "restock"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Alert:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "ALERT_CHIPS_A_1640995200000"
+        type:
+          type: string
+          enum: [critical, warning, info]
+          example: "critical"
+        title:
+          type: string
+          example: "Critical Stockout Risk"
+        message:
+          type: string
+          example: "Chips A will stock out in 2h 15m - Expected loss: $1,280"
+        sku:
+          type: string
+          example: "CHIPS_A"
+        store:
+          type: string
+          example: "102"
+        timestamp:
+          type: string
+          format: date-time
+        acknowledged:
+          type: boolean
+          example: false
+
+    SKUAnalysis:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
+        forecast:
+          $ref: '#/components/schemas/ForecastOutput'
+        replenishment:
+          $ref: '#/components/schemas/ReplenishmentOutput'
+        recommendation:
+          $ref: '#/components/schemas/RecommendationOutput'
+        planogram:
+          $ref: '#/components/schemas/PlanogramOutput'
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        history:
+          type: object
+          properties:
+            sales:
+              type: array
+              items:
+                type: number
+            inventory:
+              type: array
+              items:
+                type: number
+            labels:
+              type: array
+              items:
+                type: string
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "CHIPS_A"
+        name:
+          type: string
+          example: "Chips A"
+        brand:
+          type: string
+          example: "Premium Snacks"
+        image:
+          type: string
+          example: "data:image/svg+xml;base64,..."
+        currentStock:
+          type: integer
+          example: 34
+        backroomStock:
+          type: integer
+          example: 0
+        shelfCapacity:
+          type: integer
+          example: 48
+        price:
+          type: number
+          example: 3.99
+        cost:
+          type: number
+          example: 2.40
+        margin:
+          type: number
+          example: 39.8
+        category:
+          type: string
+          example: "Snacks"
+
+    ReplenishmentOutput:
+      type: object
+      properties:
+        taskId:
+          type: string
+          example: "T001"
+        action:
+          type: string
+          enum: [restock, substitute, escalate]
+          example: "restock"
+        message:
+          type: string
+          example: "Restock task created for 20 units."
+        backroomStock:
+          type: integer
+          example: 24
+
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded, unhealthy]
+          example: "healthy"
+        agents:
+          type: object
+          additionalProperties:
+            type: boolean
+          example:
+            "Demand Forecast Agent": true
+            "Replenishment Agent": true
+            "Recommendation Agent": true
+            "Planogram Agent": true
+            "Task Orchestrator Agent": true
+        timestamp:
+          type: string
+          format: date-time
+
+    Metadata:
+      type: object
+      properties:
+        agentsExecuted:
+          type: array
+          items:
+            type: string
+          example: ["Demand Forecast Agent", "Task Orchestrator Agent"]
+        executionTime:
+          type: number
+          description: Execution time in milliseconds
+          example: 247
+        timestamp:
+          type: string
+          format: date-time
+        storeId:
+          type: string
+          example: "102"
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: "Product INVALID_SKU not found"
+        agentsExecuted:
+          type: array
+          items:
+            type: string
+          example: ["Demand Forecast Agent"]
+        executionTime:
+          type: number
+          description: Execution time in milliseconds before error
+          example: 123
+
+tags:
+  - name: dashboard
+    description: Dashboard and KPI operations
+  - name: forecasting
+    description: Demand forecasting and risk prediction
+  - name: recommendations
+    description: Product substitution recommendations
+  - name: tasks
+    description: Task creation and management
+  - name: planogram
+    description: Shelf space optimization
+  - name: system
+    description: System health and monitoring
