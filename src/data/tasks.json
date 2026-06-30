@@ -1,0 +1,451 @@
+{
+  "activeTasks": [
+    {
+      "id": "T002",
+      "title": "Verify Promotional Display - Chips A",
+      "priority": "High",
+      "status": "in-progress",
+      "assignee": "Sarah M.",
+      "assigneeId": "EMP002",
+      "estimatedTime": "10 min",
+      "location": "Aisle 3, Section B",
+      "instructions": "Verify BOGO promotional display is properly arranged. Check signage accuracy. Ensure promotional materials are visible. Count promotional units.",
+      "sku": "CHIPS_A",
+      "storeId": "102",
+      "type": "verification",
+      "createdAt": "2024-01-15T13:45:00Z",
+      "startedAt": "2024-01-15T14:10:00Z",
+      "dueDate": "2024-01-15T15:30:00Z",
+      "createdBy": "store_manager",
+      "notes": "Part of weekend promotion verification",
+      "relatedPromotionId": "PROMO001"
+    },
+    {
+      "id": "T003",
+      "title": "Planogram Adjustment - Cereal Section",
+      "priority": "Medium",
+      "status": "pending",
+      "assignee": "Mike R.",
+      "assigneeId": "EMP003",
+      "estimatedTime": "25 min",
+      "location": "Aisle 2, Section B",
+      "instructions": "Adjust Cereal X facings from 2 to 4. Reposition for better visibility. Update category spacing. Maintain breakfast category integrity.",
+      "sku": "CEREAL_X",
+      "storeId": "102",
+      "type": "planogram",
+      "createdAt": "2024-01-15T12:30:00Z",
+      "dueDate": "2024-01-15T18:00:00Z",
+      "createdBy": "planogram_agent",
+      "notes": "Optimize shelf space based on demand patterns"
+    },
+    {
+      "id": "T004",
+      "title": "Setup Substitution Display - Chips B for Chips A",
+      "priority": "High",
+      "status": "pending",
+      "assignee": "Lisa K.",
+      "assigneeId": "EMP004",
+      "estimatedTime": "20 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Position Chips B prominently near Chips A location. Create substitution signage. Highlight 78% customer acceptance rate. Update promotional materials to include substitute.",
+      "sku": "CHIPS_B",
+      "storeId": "102",
+      "quantity": 12,
+      "type": "substitution",
+      "createdAt": "2024-01-15T14:25:00Z",
+      "dueDate": "2024-01-15T16:30:00Z",
+      "createdBy": "recommendation_agent",
+      "notes": "Backup plan for CHIPS_A stockout during promotion",
+      "relatedTask": "T001"
+    },
+    {
+      "id": "T006",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "15 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Restock required units of Premium Chips A:\n• Move inventory from backroom to shelf location\n• Ensure proper product rotation (FIFO)\n• Verify expiration dates\n• Update shelf tags if needed\n\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Ensure promotional materials are visible and accurate",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "type": "restock",
+      "createdAt": "2026-06-30T07:15:36.641Z"
+    },
+    {
+      "id": "T007",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "21 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Restock 20 units of Premium Chips A:\n• Move inventory from backroom to shelf location\n• Ensure proper product rotation (FIFO)\n• Verify expiration dates\n• Update shelf tags if needed\n\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Ensure promotional materials are visible and accurate",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 20,
+      "type": "restock",
+      "createdAt": "2026-06-30T07:15:52.865Z"
+    },
+    {
+      "id": "T008",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "21 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Restock 20 units of Premium Chips A:\n• Move inventory from backroom to shelf location\n• Ensure proper product rotation (FIFO)\n• Verify expiration dates\n• Update shelf tags if needed\n\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Ensure promotional materials are visible and accurate",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 20,
+      "type": "restock",
+      "createdAt": "2026-06-30T07:37:31.687Z"
+    },
+    {
+      "id": "T009",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "21 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Restock 20 units of Premium Chips A:\n• Move inventory from backroom to shelf location\n• Ensure proper product rotation (FIFO)\n• Verify expiration dates\n• Update shelf tags if needed\n\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Ensure promotional materials are visible and accurate",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 20,
+      "type": "restock",
+      "createdAt": "2026-06-30T08:11:27.514Z"
+    },
+    {
+      "id": "T010",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "8 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Move 1 units of Premium Chips A from backroom to shelf location.\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Update promotional signage and display\n• Ensure promotional materials are visible\n• Verify product rotation (FIFO)\n• Check expiration dates\n• Update shelf tags if needed\n• Confirm proper shelf alignment",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 1,
+      "type": "restock",
+      "createdAt": "2026-06-30T08:16:19.660Z"
+    },
+    {
+      "id": "T012",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "8 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Move 1 units of Premium Chips A from backroom to shelf location.\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Update promotional signage and display\n• Ensure promotional materials are visible\n• Verify product rotation (FIFO)\n• Check expiration dates\n• Update shelf tags if needed\n• Confirm proper shelf alignment",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 1,
+      "type": "restock",
+      "createdAt": "2026-06-30T08:32:25.716Z"
+    },
+    {
+      "id": "T013",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "8 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Move 1 units of Premium Chips A from backroom to shelf location.\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Update promotional signage and display\n• Ensure promotional materials are visible\n• Verify product rotation (FIFO)\n• Check expiration dates\n• Update shelf tags if needed\n• Confirm proper shelf alignment",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 1,
+      "type": "restock",
+      "createdAt": "2026-06-30T08:36:26.342Z"
+    },
+    {
+      "id": "T014",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "8 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Move 1 units of Premium Chips A from backroom to shelf location.\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Update promotional signage and display\n• Ensure promotional materials are visible\n• Verify product rotation (FIFO)\n• Check expiration dates\n• Update shelf tags if needed\n• Confirm proper shelf alignment",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 1,
+      "type": "restock",
+      "createdAt": "2026-06-30T08:37:21.474Z"
+    },
+    {
+      "id": "T015",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "8 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Move 1 units of Premium Chips A from backroom to shelf location.\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Update promotional signage and display\n• Ensure promotional materials are visible\n• Verify product rotation (FIFO)\n• Check expiration dates\n• Update shelf tags if needed\n• Confirm proper shelf alignment",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 1,
+      "type": "restock",
+      "createdAt": "2026-06-30T08:38:14.133Z"
+    },
+    {
+      "id": "T016",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "8 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Move 1 units of Premium Chips A from backroom to shelf location.\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Update promotional signage and display\n• Ensure promotional materials are visible\n• Verify product rotation (FIFO)\n• Check expiration dates\n• Update shelf tags if needed\n• Confirm proper shelf alignment",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 1,
+      "type": "restock",
+      "createdAt": "2026-06-30T08:43:22.821Z"
+    },
+    {
+      "id": "T017",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "10 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Move 5 units of Premium Chips A from backroom to shelf location.\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Update promotional signage and display\n• Ensure promotional materials are visible\n• Verify product rotation (FIFO)\n• Check expiration dates\n• Update shelf tags if needed\n• Confirm proper shelf alignment",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "quantity": 5,
+      "type": "restock",
+      "createdAt": "2026-06-30T08:43:23.634Z"
+    },
+    {
+      "id": "T018",
+      "title": "Restock Premium Chips A",
+      "priority": "Critical",
+      "assignee": "System Assigned",
+      "estimatedTime": "15 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Restock required units of Premium Chips A:\n• Move inventory from backroom to shelf location\n• Ensure proper product rotation (FIFO)\n• Verify expiration dates\n• Update shelf tags if needed\n\n⚠️ PROMOTION ACTIVE: Buy 1 Get 1 Free\n• Ensure promotional materials are visible and accurate",
+      "status": "pending",
+      "sku": "CHIPS_A",
+      "type": "restock",
+      "createdAt": "2026-06-30T08:43:24.396Z"
+    }
+  ],
+  "completedTasks": [
+    {
+      "id": "T000",
+      "title": "Morning Inventory Count - Snacks",
+      "priority": "Medium",
+      "status": "completed",
+      "assignee": "David L.",
+      "assigneeId": "EMP005",
+      "estimatedTime": "30 min",
+      "actualTime": "28 min",
+      "location": "Aisle 3, All Sections",
+      "instructions": "Count all snack inventory. Update system with current counts. Note any discrepancies.",
+      "sku": "ALL_SNACKS",
+      "storeId": "102",
+      "type": "verification",
+      "createdAt": "2024-01-15T08:00:00Z",
+      "startedAt": "2024-01-15T08:15:00Z",
+      "completedAt": "2024-01-15T08:43:00Z",
+      "dueDate": "2024-01-15T09:00:00Z",
+      "createdBy": "store_manager",
+      "completedBy": "EMP005",
+      "notes": "All counts verified. 2 discrepancies found and corrected.",
+      "rating": 5
+    },
+    {
+      "id": "T001",
+      "title": "Restock Premium Chips A - URGENT",
+      "priority": "Critical",
+      "status": "completed",
+      "assignee": "John D.",
+      "assigneeId": "EMP001",
+      "estimatedTime": "15 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Move 20 units from backroom to shelf. Update promotional display for BOGO offer. Verify product rotation (FIFO). Check expiration dates. Update shelf tags if needed.\n\nNotes: Restocked 20 units successfully",
+      "sku": "CHIPS_A",
+      "storeId": "102",
+      "quantity": 20,
+      "type": "restock",
+      "createdAt": "2024-01-15T14:20:00Z",
+      "dueDate": "2024-01-15T16:00:00Z",
+      "createdBy": "system",
+      "notes": "Critical stockout risk detected by AI agent",
+      "relatedPromotionId": "PROMO001",
+      "updatedAt": "2026-06-30T07:30:06.954Z"
+    },
+    {
+      "id": "T001",
+      "title": "Restock Premium Chips A - URGENT",
+      "priority": "Critical",
+      "status": "completed",
+      "assignee": "John D.",
+      "assigneeId": "EMP001",
+      "estimatedTime": "15 min",
+      "location": "Aisle 3, Section A",
+      "instructions": "Move 40 units from backroom to shelf. Update promotional display for BOGO offer. Verify product rotation (FIFO). Check expiration dates. Update shelf tags if needed.\n\nNotes: Restocked 40 units successfully. New total stock: 74 units.",
+      "sku": "CHIPS_A",
+      "storeId": "102",
+      "quantity": 40,
+      "type": "restock",
+      "createdAt": "2024-01-15T14:20:00Z",
+      "dueDate": "2024-01-15T16:00:00Z",
+      "createdBy": "system",
+      "notes": "Critical stockout risk detected by AI agent",
+      "relatedPromotionId": "PROMO001",
+      "updatedAt": "2026-06-30T08:42:28.222Z"
+    }
+  ],
+  "taskTemplates": [
+    {
+      "id": "TEMPLATE_RESTOCK",
+      "title": "Restock {productName}",
+      "type": "restock",
+      "defaultInstructions": "Move {quantity} units from backroom to shelf location. Verify product rotation (FIFO). Check expiration dates. Update shelf tags if needed.",
+      "estimatedTimeFormula": "baseTime(5) + (quantity * 0.5)",
+      "priority": "Medium",
+      "requiredFields": [
+        "sku",
+        "quantity",
+        "location"
+      ],
+      "category": "inventory"
+    },
+    {
+      "id": "TEMPLATE_VERIFICATION",
+      "title": "Verify {productName} Display",
+      "type": "verification",
+      "defaultInstructions": "Verify display is properly arranged. Check signage accuracy. Ensure promotional materials are visible. Count units if required.",
+      "estimatedTimeFormula": "baseTime(10)",
+      "priority": "Low",
+      "requiredFields": [
+        "sku",
+        "location"
+      ],
+      "category": "display"
+    },
+    {
+      "id": "TEMPLATE_PLANOGRAM",
+      "title": "Adjust {productName} Planogram",
+      "type": "planogram",
+      "defaultInstructions": "Modify facing count as recommended. Ensure proper shelf allocation. Update position for optimal visibility. Maintain category integrity.",
+      "estimatedTimeFormula": "baseTime(20) + (facingChange * 3)",
+      "priority": "Medium",
+      "requiredFields": [
+        "sku",
+        "location",
+        "facingChange"
+      ],
+      "category": "merchandising"
+    },
+    {
+      "id": "TEMPLATE_SUBSTITUTION",
+      "title": "Setup Substitute for {productName}",
+      "type": "substitution",
+      "defaultInstructions": "Position substitute product prominently. Create substitution signage. Place substitution notification. Update promotional materials if needed.",
+      "estimatedTimeFormula": "baseTime(18) + (quantity * 0.3)",
+      "priority": "High",
+      "requiredFields": [
+        "sku",
+        "substituteSku",
+        "location"
+      ],
+      "category": "customer_service"
+    }
+  ],
+  "employees": [
+    {
+      "id": "EMP001",
+      "name": "John D.",
+      "fullName": "John Davis",
+      "role": "Stock Associate",
+      "shift": "morning",
+      "skills": [
+        "restocking",
+        "inventory",
+        "customer_service"
+      ],
+      "availability": "available",
+      "currentTask": null,
+      "performance": {
+        "completionRate": 94,
+        "averageTime": 16.5,
+        "quality": 4.8
+      }
+    },
+    {
+      "id": "EMP002",
+      "name": "Sarah M.",
+      "fullName": "Sarah Martinez",
+      "role": "Merchandising Associate",
+      "shift": "afternoon",
+      "skills": [
+        "merchandising",
+        "planogram",
+        "displays"
+      ],
+      "availability": "busy",
+      "currentTask": "T002",
+      "performance": {
+        "completionRate": 97,
+        "averageTime": 14.2,
+        "quality": 4.9
+      }
+    },
+    {
+      "id": "EMP003",
+      "name": "Mike R.",
+      "fullName": "Mike Rodriguez",
+      "role": "Senior Associate",
+      "shift": "evening",
+      "skills": [
+        "planogram",
+        "training",
+        "inventory",
+        "management"
+      ],
+      "availability": "available",
+      "currentTask": null,
+      "performance": {
+        "completionRate": 99,
+        "averageTime": 12.8,
+        "quality": 5
+      }
+    },
+    {
+      "id": "EMP004",
+      "name": "Lisa K.",
+      "fullName": "Lisa Kim",
+      "role": "Customer Experience Associate",
+      "shift": "morning",
+      "skills": [
+        "customer_service",
+        "substitution",
+        "promotions"
+      ],
+      "availability": "available",
+      "currentTask": null,
+      "performance": {
+        "completionRate": 92,
+        "averageTime": 18.7,
+        "quality": 4.7
+      }
+    },
+    {
+      "id": "EMP005",
+      "name": "David L.",
+      "fullName": "David Lee",
+      "role": "Inventory Specialist",
+      "shift": "morning",
+      "skills": [
+        "inventory",
+        "verification",
+        "auditing",
+        "systems"
+      ],
+      "availability": "available",
+      "currentTask": null,
+      "performance": {
+        "completionRate": 98,
+        "averageTime": 22.1,
+        "quality": 4.9
+      }
+    }
+  ]
+}

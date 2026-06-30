@@ -16,11 +16,14 @@ import { TaskOrchestratorAgent } from './taskOrchestratorAgent';
 
 import { 
   getProduct, 
-  products, 
-  mockTasks, 
+  getProducts,
+  getTasks, 
   getSalesHistory, 
   getInventoryHistory 
-} from '../data/mockDatabase';
+} from '../data/serverDatabase';
+
+// Get tasks for compatibility
+const mockTasks = getTasks();
 
 /**
  * Shelf Intelligence Orchestrator
@@ -57,6 +60,8 @@ export class ShelfIntelligenceOrchestrator {
       agentsExecuted.push('Demand Forecast Agent');
       const topRisks: StockRisk[] = [];
       
+      const products = getProducts(context.storeId);
+      
       for (const product of products.slice(0, 10)) { // Analyze top 10 products
         try {
           const forecast = await this.demandAgent.forecast({
@@ -69,7 +74,7 @@ export class ShelfIntelligenceOrchestrator {
               sku: product.id,
               store: context.storeId,
               product: product.name,
-              currentStock: product.currentStock,
+              currentStock: product.currentStock || 0,
               forecast: `Stockout in ${Math.round(forecast.runoutHours)}h`,
               riskLevel: forecast.riskLevel,
               timeRemaining: `${Math.round(forecast.runoutHours)}h`,
@@ -77,7 +82,7 @@ export class ShelfIntelligenceOrchestrator {
               status: 'pending',
               confidence: forecast.confidence,
               expectedLoss: forecast.expectedLoss,
-              salesIncrease: product.promotion?.lift || 0,
+              salesIncrease: product.promotion?.metrics?.lift || 0,
               salesVelocity: forecast.salesVelocity,
               runoutHours: forecast.runoutHours
             });
@@ -150,7 +155,7 @@ export class ShelfIntelligenceOrchestrator {
       agentsExecuted.push('Replenishment Agent');
       const optimalQuantity = await this.replenishmentAgent.getOptimalRestockQuantity(
         skuId,
-        product.currentStock,
+        product.currentStock || 0,
         forecast.salesVelocity
       );
 
@@ -218,8 +223,8 @@ export class ShelfIntelligenceOrchestrator {
 
   private async calculateKPIs(storeId: string): Promise<KPIs> {
     // Calculate real-time KPIs based on current data
-    const allProducts = products;
-    const allTasks = mockTasks;
+    const allProducts = getProducts(storeId);
+    const allTasks = getTasks();
 
     // At-risk SKUs (MEDIUM, HIGH, CRITICAL)
     let atRiskCount = 0;

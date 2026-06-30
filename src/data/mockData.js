@@ -1,147 +1,253 @@
-// Mock data for the Shelf Intelligence demo
+// Legacy compatibility layer for UI components
+// This file provides the same data structure as before but sources from JSON files
 
-export const stores = [
-  { id: '102', name: 'Store #102 - Downtown', status: 'active' },
-  { id: '103', name: 'Store #103 - Mall', status: 'active' },
-  { id: '104', name: 'Store #104 - Suburban', status: 'active' }
-];
+// Import JSON files directly for client-side use
+import warehouseData from './warehouse.json';
+import posData from './pos.json';
+import promotionData from './promotions.json';
+import taskData from './tasks.json';
+import planogramData from './planogram.json';
 
-export const products = [
-  {
-    id: 'SKU001',
-    name: 'Chips A',
-    brand: 'Premium Snacks',
-    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkY2NzAwIiByeD0iMTAiLz4KPHRleHQgeD0iNTAiIHk9IjU1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DaGlwcyBBPC90ZXh0Pgo8L3N2Zz4=',
-    currentStock: 34,
-    backroomStock: 0,
-    shelfCapacity: 48,
-    price: 3.99,
-    cost: 2.40,
-    margin: 39.8,
-    category: 'Snacks',
-    promotion: {
-      active: true,
-      type: 'Buy 1 Get 1 Free',
-      startDate: '2024-01-15',
-      endDate: '2024-01-21',
-      lift: 65
-    }
-  },
-  {
-    id: 'SKU002', 
-    name: 'Chips B',
-    brand: 'Premium Snacks',
-    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMDA3Q0ZGIiByeD0iMTAiLz4KPHRleHQgeD0iNTAiIHk9IjU1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DaGlwcyBCPC90ZXh0Pgo8L3N2Zz4=',
-    currentStock: 67,
-    backroomStock: 24,
-    shelfCapacity: 48,
-    price: 4.29,
-    cost: 2.50,
-    margin: 41.7,
-    category: 'Snacks',
-    substitutionRate: 78,
-    marginImpact: 10
+// Client-side database manager
+class ClientDatabase {
+  getProduct(skuId, storeId = '102') {
+    const product = warehouseData.products.find(p => p.id === skuId);
+    if (!product) return undefined;
+
+    // Get inventory data for this store
+    const inventory = warehouseData.inventory.find(i => 
+      i.storeId === storeId && i.skuId === skuId
+    );
+    
+    // Get promotion data
+    const promotion = promotionData.activePromotions.find(p => 
+      p.skuId === skuId && p.storeIds?.includes(storeId)
+    );
+    
+    // Merge data into product
+    return {
+      ...product,
+      currentStock: inventory?.currentStock || 0,
+      backroomStock: inventory?.backroomStock || 0,
+      shelfCapacity: inventory?.shelfCapacity || 48,
+      promotion: promotion ? {
+        ...promotion,
+        active: promotion.status === 'active',
+        lift: promotion.metrics?.lift || 0
+      } : undefined
+    };
   }
-];
 
-export const riskLevels = {
-  CRITICAL: { label: 'Critical', color: '#EF4444', priority: 1 },
-  HIGH: { label: 'High', color: '#F59E0B', priority: 2 },
-  MEDIUM: { label: 'Medium', color: '#F59E0B', priority: 3 },
-  LOW: { label: 'Low', color: '#22C55E', priority: 4 }
+  getProducts(storeId = '102') {
+    return warehouseData.products.map(product => {
+      const inventory = warehouseData.inventory.find(i => 
+        i.storeId === storeId && i.skuId === product.id
+      );
+      
+      const promotion = promotionData.activePromotions.find(p => 
+        p.skuId === product.id && p.storeIds?.includes(storeId)
+      );
+      
+      return {
+        ...product,
+        currentStock: inventory?.currentStock || 0,
+        backroomStock: inventory?.backroomStock || 0,
+        shelfCapacity: inventory?.shelfCapacity || 48,
+        promotion: promotion ? {
+          ...promotion,
+          active: promotion.status === 'active',
+          lift: promotion.metrics?.lift || 0
+        } : undefined
+      };
+    });
+  }
+
+  getSalesHistory(skuId) {
+    const history = posData.salesHistory[skuId] || [];
+    return history.map(h => h.units);
+  }
+
+  getInventoryHistory(skuId) {
+    const history = posData.inventoryHistory[skuId] || [];
+    return history.map(h => h.stock);
+  }
+}
+
+const clientDb = new ClientDatabase();
+
+// KPI data for dashboard
+export const kpis = {
+  atRiskSKUs: 3,
+  revenueProtected: 15680,
+  tasksPending: 4,
+  stockoutPredictions: 3,
+  forecastAccuracy: 94.5,
+  oosRate: 2.3,
+  marginImpact: 1250
 };
 
+// Stock risk data for risk table
 export const stockRiskData = [
   {
-    sku: 'SKU001',
-    store: '102',
-    product: 'Chips A',
+    sku: 'CHIPS_A',
+    product: 'Premium Chips A', 
     currentStock: 34,
-    forecast: 'Stockout in 2h',
+    forecast: 'Stockout in 2h 15m',
     riskLevel: 'CRITICAL',
     timeRemaining: '2h 15m',
-    recommendedAction: 'Restock 20 units',
+    recommendedAction: 'Restock 20 units immediately',
     status: 'pending',
     confidence: 96,
     expectedLoss: 1280,
     salesIncrease: 65
   },
   {
-    sku: 'SKU002',
-    store: '102', 
-    product: 'Chips B',
+    sku: 'CHIPS_B',
+    product: 'Premium Chips B',
     currentStock: 67,
-    forecast: 'Stable for 8h',
-    riskLevel: 'LOW',
-    timeRemaining: '8h 30m',
-    recommendedAction: 'Monitor',
-    status: 'stable',
+    forecast: 'Stockout in 8h 30m',
+    riskLevel: 'MEDIUM',
+    timeRemaining: '8h 30m', 
+    recommendedAction: 'Monitor and plan restock',
+    status: 'monitoring',
     confidence: 87,
-    expectedLoss: 0,
+    expectedLoss: 340,
     salesIncrease: 12
-  }
-];
-
-export const kpis = {
-  atRiskSKUs: 12,
-  revenueProtected: 15680,
-  tasksPending: 8,
-  stockoutPredictions: 15,
-  forecastAccuracy: 94.5
-};
-
-export const tasks = [
-  {
-    id: 'T001',
-    title: 'Restock Chips A',
-    priority: 'Critical',
-    assignee: 'John D.',
-    estimatedTime: '15 min',
-    location: 'Aisle 3, Section A',
-    instructions: 'Move 20 units from backroom to shelf. Update planogram display.',
-    status: 'pending',
-    sku: 'SKU001',
-    quantity: 20,
-    type: 'restock'
   },
   {
-    id: 'T002',
-    title: 'Verify Shelf Display',
-    priority: 'High',
-    assignee: 'Sarah M.',
-    estimatedTime: '10 min',
-    location: 'Aisle 3, Section B',
-    instructions: 'Verify promotional display is properly arranged.',
-    status: 'in-progress',
-    sku: 'SKU001',
-    type: 'verification'
+    sku: 'CEREAL_X',
+    product: 'Breakfast Cereal X',
+    currentStock: 23,
+    forecast: 'Stockout in 12h',
+    riskLevel: 'MEDIUM',
+    timeRemaining: '12h',
+    recommendedAction: 'Schedule restock within 8h',
+    status: 'scheduled',
+    confidence: 82,
+    expectedLoss: 185,
+    salesIncrease: 5
   }
 ];
 
+// Risk level definitions
+export const riskLevels = {
+  CRITICAL: { color: '#EF4444', threshold: 4 },
+  HIGH: { color: '#F97316', threshold: 8 },
+  MEDIUM: { color: '#F59E0B', threshold: 24 },
+  LOW: { color: '#22C55E', threshold: Infinity }
+};
+
+// Demand forecast chart data
 export const demandForecastData = {
   labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
   sales: [45, 52, 48, 73, 89, 156, 234],
   inventory: [120, 98, 76, 58, 42, 34, 12],
-  forecast: [178, 145, 123, 98, 67, 34, 0]
+  datasets: [
+    {
+      label: 'Sales (Units)',
+      data: [45, 52, 48, 73, 89, 156, 234],
+      borderColor: '#2563EB',
+      backgroundColor: 'rgba(37, 99, 235, 0.1)',
+      fill: true,
+      tension: 0.4
+    },
+    {
+      label: 'Inventory Level', 
+      data: [120, 98, 76, 58, 42, 34, 12],
+      borderColor: '#DC2626',
+      backgroundColor: 'rgba(220, 38, 38, 0.1)',
+      fill: true,
+      tension: 0.4
+    }
+  ]
 };
 
-export const substitutions = [
+// Agent workflow visualization data
+export const agentWorkflow = [
   {
-    originalSKU: 'SKU001',
-    substituteSKU: 'SKU002',
-    acceptanceRate: 78,
-    marginImpact: 10,
-    expectedRecovery: 85,
-    reason: 'Similar product category with higher margin'
+    id: 1,
+    name: 'Demand Forecast Agent',
+    status: 'completed',
+    description: 'Analyzed sales velocity and predicted stockout in 2h 15m',
+    confidence: 96,
+    executionTime: 247,
+    output: 'CRITICAL risk detected for CHIPS_A'
+  },
+  {
+    id: 2,
+    name: 'Replenishment Agent', 
+    status: 'completed',
+    description: 'Checked backroom inventory - 0 units available',
+    confidence: 100,
+    executionTime: 156,
+    output: 'Recommend substitute product pathway'
+  },
+  {
+    id: 3,
+    name: 'Recommendation Agent',
+    status: 'completed', 
+    description: 'Found substitute: CHIPS_B (78% acceptance rate)',
+    confidence: 89,
+    executionTime: 312,
+    output: 'CHIPS_B recommended with +10% margin'
+  },
+  {
+    id: 4,
+    name: 'Task Orchestrator',
+    status: 'in-progress',
+    description: 'Creating high-priority substitution task',
+    confidence: null,
+    executionTime: null,
+    output: 'Task T004 being assigned...'
+  },
+  {
+    id: 5,
+    name: 'Planogram Agent',
+    status: 'queued',
+    description: 'Optimize shelf positioning for substitute',
+    confidence: null,
+    executionTime: null,
+    output: null
   }
 ];
 
-export const agentWorkflow = [
-  { step: 'Observe', description: 'Monitor POS & inventory data', status: 'completed' },
-  { step: 'Analyze', description: 'Process demand patterns', status: 'completed' },
-  { step: 'Predict', description: 'Forecast stockout risk', status: 'completed' },
-  { step: 'Recommend', description: 'Generate replenishment plan', status: 'active' },
-  { step: 'Assign', description: 'Create tasks for associates', status: 'pending' },
-  { step: 'Execute', description: 'Complete shelf actions', status: 'pending' },
-  { step: 'Measure', description: 'Track business impact', status: 'pending' }
+// Product data (from client database) - make it a function to get fresh data
+export const getProducts = () => clientDb.getProducts();
+export const products = clientDb.getProducts();
+
+// Substitution data
+export const substitutions = [
+  {
+    originalSKU: 'CHIPS_A',
+    substitute: 'CHIPS_B',
+    acceptanceRate: 78,
+    marginImpact: 10,
+    reason: 'Same brand family with higher margin'
+  }
 ];
+
+// Sales and inventory history for charts
+export const salesHistory = {
+  'CHIPS_A': clientDb.getSalesHistory('CHIPS_A'),
+  'CHIPS_B': clientDb.getSalesHistory('CHIPS_B'),
+  'CEREAL_X': clientDb.getSalesHistory('CEREAL_X')
+};
+
+export const inventoryHistory = {
+  'CHIPS_A': clientDb.getInventoryHistory('CHIPS_A'),
+  'CHIPS_B': clientDb.getInventoryHistory('CHIPS_B'), 
+  'CEREAL_X': clientDb.getInventoryHistory('CEREAL_X')
+};
+
+// Export all for compatibility
+export default {
+  kpis,
+  stockRiskData,
+  riskLevels,
+  demandForecastData,
+  agentWorkflow,
+  products,
+  substitutions,
+  salesHistory,
+  inventoryHistory
+};

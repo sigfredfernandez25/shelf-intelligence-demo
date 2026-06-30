@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
-import Dashboard from './pages/Dashboard';
-import SKUDetail from './pages/SKUDetail';
+import Dashboard from './components/Dashboard';
+import SKUDetail from './components/SKUDetail';
 import AgentTester from './components/AgentTester';
-import MobileDashboard from './pages/mobile/MobileDashboard';
-import TaskDetail from './pages/mobile/TaskDetail';
-import SubstitutionScreen from './pages/mobile/SubstitutionScreen';
-import SuccessScreen from './pages/mobile/SuccessScreen';
+import MobileDashboard from './components/mobile/MobileDashboard';
+import TaskDetail from './components/mobile/TaskDetail';
+import SubstitutionScreen from './components/mobile/SubstitutionScreen';
+import SuccessScreen from './components/mobile/SuccessScreen';
 import './styles/App.css';
 import './styles/mobile.css';
 
@@ -18,6 +18,7 @@ function App() {
   const [selectedTask, setSelectedTask] = useState(null);
   const [isMobileMode, setIsMobileMode] = useState(false);
   const [completionType, setCompletionType] = useState('restock');
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const handleSKUClick = (sku) => {
     setSelectedSKU(sku);
@@ -50,6 +51,8 @@ function App() {
   const handleTaskComplete = () => {
     setCompletionType('restock');
     setCurrentView('success');
+    // Trigger data refresh when we eventually return to dashboard
+    setRefreshKey(prev => prev + 1);
   };
 
   const handleSubstitutionApprove = () => {
@@ -83,6 +86,7 @@ function App() {
             <Dashboard 
               onSKUClick={handleSKUClick}
               onSwitchToMobile={handleSwitchToMobile}
+              refreshKey={refreshKey}
             />
           )}
           

@@ -30,7 +30,7 @@ const SuccessScreen = ({ onBackToHome, type = 'restock' }) => {
           title: 'Task Completed!',
           subtitle: 'Shelf successfully restocked',
           icon: '✅',
-          message: 'Chips A inventory replenished with 20 units',
+          message: 'Premium Chips A inventory replenished - New total: 74 units (added 40)',
           impact: [
             { label: 'Revenue Protected', value: '$1,280', color: 'var(--success)' },
             { label: 'Stockout Risk Reduced', value: '96% → 5%', color: 'var(--success)' },

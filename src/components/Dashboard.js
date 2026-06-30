@@ -6,16 +6,16 @@ import RiskTable from '../components/RiskTable';
 import DemandChart from '../components/DemandChart';
 import RecommendationPanel from '../components/RecommendationPanel';
 
-const Dashboard = ({ onSKUClick, onSwitchToMobile }) => {
+const Dashboard = ({ onSKUClick, onSwitchToMobile, refreshKey }) => {
   const [taskGenerated, setTaskGenerated] = useState(false);
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [agentMetadata, setAgentMetadata] = useState(null);
 
-  // Load real agent data on component mount
+  // Load real agent data on component mount and when refreshKey changes
   useEffect(() => {
     loadDashboardData();
-  }, []);
+  }, [refreshKey]);
 
   const loadDashboardData = async () => {
     try {
@@ -75,7 +75,7 @@ const Dashboard = ({ onSKUClick, onSwitchToMobile }) => {
   };
 
   const handleViewDetails = () => {
-    onSKUClick('SKU001');
+    onSKUClick('CHIPS_A');
   };
 
   // Show loading state
@@ -168,7 +168,10 @@ const Dashboard = ({ onSKUClick, onSwitchToMobile }) => {
       </div>
 
       <div className="dashboard-grid">
-        <RiskTable onSKUClick={onSKUClick} />
+        <RiskTable 
+          onSKUClick={onSKUClick} 
+          riskData={dashboardData?.topRisks || []} 
+        />
         <RecommendationPanel onGenerateTask={handleGenerateTask} />
       </div>
 

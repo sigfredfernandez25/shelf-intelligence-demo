@@ -1,5 +1,5 @@
 import { RecommendationInput, RecommendationOutput } from '../types';
-import { getProduct, getSubstitution } from '../data/mockDatabase';
+import { getProduct, getSubstitution } from '../data/serverDatabase';
 
 /**
  * Recommendation Agent
@@ -29,7 +29,7 @@ export class RecommendationAgent {
     }
 
     // Verify substitute has sufficient stock
-    const substituteStock = substituteProduct.currentStock + substituteProduct.backroomStock;
+    const substituteStock = (substituteProduct.currentStock || 0) + (substituteProduct.backroomStock || 0);
     if (substituteStock < 10) {
       return null; // Substitute also low on stock
     }
@@ -109,7 +109,7 @@ export class RecommendationAgent {
     }
     
     // Stock availability
-    const totalSubstituteStock = substituteProduct.currentStock + substituteProduct.backroomStock;
+    const totalSubstituteStock = (substituteProduct.currentStock || 0) + (substituteProduct.backroomStock || 0);
     if (totalSubstituteStock > 30) {
       reasons.push("sufficient inventory to handle increased demand");
     }
@@ -159,7 +159,7 @@ export class RecommendationAgent {
     const satisfactionImpact = acceptanceRate; // Direct correlation for demo
     
     // Inventory impact assessment
-    const substituteCapacity = substitute.currentStock + substitute.backroomStock;
+    const substituteCapacity = (substitute.currentStock || 0) + (substitute.backroomStock || 0);
     let inventoryImpact: string;
     
     if (capturedDemand <= substituteCapacity * 0.3) {
@@ -189,7 +189,7 @@ export class RecommendationAgent {
       throw new Error(`Substitute product ${substituteSkuId} not found`);
     }
 
-    const totalStock = substitute.currentStock + substitute.backroomStock;
+    const totalStock = (substitute.currentStock || 0) + (substitute.backroomStock || 0);
     const available = totalStock >= requiredQuantity;
     
     // Keep safety stock of 20% for substitute

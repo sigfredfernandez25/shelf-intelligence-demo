@@ -1,0 +1,134 @@
+{
+  "activePromotions": [
+    {
+      "id": "PROMO001",
+      "name": "BOGO Chips Weekend Special",
+      "type": "Buy 1 Get 1 Free",
+      "skuId": "CHIPS_A",
+      "storeIds": ["102", "103"],
+      "startDate": "2024-01-15T00:00:00Z",
+      "endDate": "2024-01-21T23:59:59Z",
+      "status": "active",
+      "description": "Buy one Premium Chips A, get one free - Weekend promotion",
+      "rules": {
+        "minQuantity": 1,
+        "maxQuantity": 4,
+        "eligibleDays": ["friday", "saturday", "sunday"]
+      },
+      "metrics": {
+        "lift": 65,
+        "expectedSalesIncrease": 180,
+        "budgetedCost": 2500,
+        "actualCost": 1850
+      },
+      "createdBy": "marketing_team",
+      "createdAt": "2024-01-10T09:30:00Z",
+      "lastUpdated": "2024-01-15T08:15:00Z"
+    },
+    {
+      "id": "PROMO002", 
+      "name": "Breakfast Bundle Deal",
+      "type": "Bundle Discount",
+      "skuIds": ["CEREAL_X", "MILK_2L"],
+      "storeIds": ["102", "103", "104"],
+      "startDate": "2024-01-12T00:00:00Z",
+      "endDate": "2024-01-26T23:59:59Z", 
+      "status": "active",
+      "description": "Save $2 when you buy Cereal X with any 2L milk",
+      "rules": {
+        "discount": 2.00,
+        "requiresBoth": true,
+        "maxUsesPerCustomer": 2
+      },
+      "metrics": {
+        "lift": 25,
+        "expectedSalesIncrease": 45,
+        "budgetedCost": 800,
+        "actualCost": 650
+      },
+      "createdBy": "store_manager",
+      "createdAt": "2024-01-08T14:20:00Z",
+      "lastUpdated": "2024-01-12T07:45:00Z"
+    }
+  ],
+  "scheduledPromotions": [
+    {
+      "id": "PROMO003",
+      "name": "Spring Refresh Sale",
+      "type": "Percentage Discount",
+      "categoryId": "Beverages",
+      "storeIds": ["102", "103", "104"],
+      "startDate": "2024-02-01T00:00:00Z",
+      "endDate": "2024-02-14T23:59:59Z",
+      "status": "scheduled",
+      "description": "15% off all beverages for spring refresh",
+      "rules": {
+        "discountPercentage": 15,
+        "minPurchase": 10.00,
+        "stackable": false
+      },
+      "metrics": {
+        "projectedLift": 40,
+        "projectedSalesIncrease": 120,
+        "budgetedCost": 1500
+      },
+      "createdBy": "regional_manager",
+      "createdAt": "2024-01-05T11:15:00Z"
+    }
+  ],
+  "expiredPromotions": [
+    {
+      "id": "PROMO000",
+      "name": "New Year Clearance",
+      "type": "Fixed Discount", 
+      "categoryId": "Snacks",
+      "storeIds": ["102", "103", "104"],
+      "startDate": "2024-01-01T00:00:00Z",
+      "endDate": "2024-01-07T23:59:59Z",
+      "status": "expired",
+      "description": "$1 off all snack items",
+      "rules": {
+        "discountAmount": 1.00,
+        "minQuantity": 1
+      },
+      "metrics": {
+        "actualLift": 55,
+        "actualSalesIncrease": 340,
+        "budgetedCost": 2000,
+        "actualCost": 1790,
+        "roi": 285
+      },
+      "createdBy": "marketing_team",
+      "createdAt": "2023-12-20T10:00:00Z",
+      "endedAt": "2024-01-07T23:59:59Z"
+    }
+  ],
+  "promotionTemplates": [
+    {
+      "id": "TEMPLATE_BOGO",
+      "name": "Buy One Get One Free",
+      "type": "Buy 1 Get 1 Free",
+      "description": "Standard BOGO promotion template",
+      "defaultRules": {
+        "minQuantity": 1,
+        "maxQuantity": 6,
+        "stackable": false
+      },
+      "category": "discount",
+      "popularity": 85
+    },
+    {
+      "id": "TEMPLATE_BUNDLE",
+      "name": "Product Bundle",
+      "type": "Bundle Discount", 
+      "description": "Multi-product bundle discount template",
+      "defaultRules": {
+        "requiresAll": true,
+        "maxUsesPerCustomer": 3,
+        "stackable": true
+      },
+      "category": "bundle",
+      "popularity": 72
+    }
+  ]
+}

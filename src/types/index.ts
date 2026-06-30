@@ -10,25 +10,61 @@ export interface Product {
   id: string;
   name: string;
   brand: string;
+  category: string;
+  subcategory?: string;
+  barcode?: string;
   image: string;
-  currentStock: number;
-  backroomStock: number;
-  shelfCapacity: number;
   price: number;
   cost: number;
   margin: number;
-  category: string;
+  weight?: string;
+  dimensions?: {
+    length: number;
+    width: number;
+    height: number;
+  };
+  nutritionalInfo?: any;
+  allergens?: string[];
+  supplier?: string;
+  supplierId?: string;
+  // Inventory fields (from warehouse data)
+  currentStock?: number;
+  backroomStock?: number;
+  shelfCapacity?: number;
+  // Promotion fields (computed from promotions data)
   promotion?: Promotion;
   substitutionRate?: number;
   marginImpact?: number;
 }
 
 export interface Promotion {
-  active: boolean;
+  id: string;
+  name: string;
   type: string;
+  skuId?: string;
+  skuIds?: string[];
+  categoryId?: string;
+  storeIds?: string[];
   startDate: string;
   endDate: string;
-  lift: number;
+  status: 'active' | 'scheduled' | 'expired';
+  description: string;
+  rules: any;
+  metrics: {
+    lift?: number;
+    expectedSalesIncrease?: number;
+    actualSalesIncrease?: number;
+    budgetedCost?: number;
+    actualCost?: number;
+    roi?: number;
+  };
+  createdBy: string;
+  createdAt: string;
+  lastUpdated?: string;
+  endedAt?: string;
+  // Legacy compatibility
+  active?: boolean;
+  lift?: number;
 }
 
 export type RiskLevel = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
@@ -55,15 +91,27 @@ export interface Task {
   title: string;
   priority: 'Low' | 'Medium' | 'High' | 'Critical';
   assignee: string;
+  assigneeId?: string;
   estimatedTime: string;
+  actualTime?: string;
   location: string;
   instructions: string;
   status: 'pending' | 'in-progress' | 'completed' | 'escalated';
   sku: string;
+  storeId?: string;
   quantity?: number;
   type: 'restock' | 'verification' | 'substitution' | 'planogram';
   createdAt?: string;
+  startedAt?: string;
+  completedAt?: string;
   updatedAt?: string;
+  dueDate?: string;
+  createdBy?: string;
+  completedBy?: string;
+  notes?: string;
+  rating?: number;
+  relatedPromotionId?: string;
+  relatedTask?: string;
 }
 
 export interface Substitution {
@@ -73,6 +121,8 @@ export interface Substitution {
   marginImpact: number;
   expectedRecovery: number;
   reason: string;
+  priority?: number;
+  active?: boolean;
 }
 
 export interface KPIs {

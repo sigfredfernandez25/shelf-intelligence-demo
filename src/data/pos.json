@@ -1,0 +1,107 @@
+{
+  "salesHistory": {
+    "CHIPS_A": [
+      { "date": "2024-01-09", "units": 45, "revenue": 179.55, "transactions": 23 },
+      { "date": "2024-01-10", "units": 52, "revenue": 207.48, "transactions": 28 },
+      { "date": "2024-01-11", "units": 48, "revenue": 191.52, "transactions": 25 },
+      { "date": "2024-01-12", "units": 73, "revenue": 291.27, "transactions": 38 },
+      { "date": "2024-01-13", "units": 89, "revenue": 355.11, "transactions": 45 },
+      { "date": "2024-01-14", "units": 156, "revenue": 622.44, "transactions": 78 },
+      { "date": "2024-01-15", "units": 234, "revenue": 933.66, "transactions": 117 }
+    ],
+    "CHIPS_B": [
+      { "date": "2024-01-09", "units": 32, "revenue": 137.28, "transactions": 18 },
+      { "date": "2024-01-10", "units": 28, "revenue": 120.12, "transactions": 16 },
+      { "date": "2024-01-11", "units": 35, "revenue": 150.15, "transactions": 19 },
+      { "date": "2024-01-12", "units": 41, "revenue": 175.89, "transactions": 22 },
+      { "date": "2024-01-13", "units": 38, "revenue": 163.02, "transactions": 21 },
+      { "date": "2024-01-14", "units": 44, "revenue": 188.76, "transactions": 24 },
+      { "date": "2024-01-15", "units": 52, "revenue": 223.08, "transactions": 28 }
+    ],
+    "CEREAL_X": [
+      { "date": "2024-01-09", "units": 18, "revenue": 107.82, "transactions": 12 },
+      { "date": "2024-01-10", "units": 22, "revenue": 131.78, "transactions": 15 },
+      { "date": "2024-01-11", "units": 19, "revenue": 113.81, "transactions": 13 },
+      { "date": "2024-01-12", "units": 25, "revenue": 149.75, "transactions": 17 },
+      { "date": "2024-01-13", "units": 23, "revenue": 137.77, "transactions": 16 },
+      { "date": "2024-01-14", "units": 28, "revenue": 167.72, "transactions": 19 },
+      { "date": "2024-01-15", "units": 31, "revenue": 185.69, "transactions": 21 }
+    ],
+    "SODA_COLA": [
+      { "date": "2024-01-09", "units": 95, "revenue": 236.55, "transactions": 45 },
+      { "date": "2024-01-10", "units": 102, "revenue": 253.98, "transactions": 48 },
+      { "date": "2024-01-11", "units": 87, "revenue": 216.63, "transactions": 41 },
+      { "date": "2024-01-12", "units": 118, "revenue": 293.82, "transactions": 56 },
+      { "date": "2024-01-13", "units": 134, "revenue": 333.66, "transactions": 63 },
+      { "date": "2024-01-14", "units": 145, "revenue": 361.05, "transactions": 68 },
+      { "date": "2024-01-15", "units": 167, "revenue": 415.83, "transactions": 78 }
+    ]
+  },
+  "inventoryHistory": {
+    "CHIPS_A": [
+      { "date": "2024-01-09", "stock": 120, "changes": [{"type": "sale", "quantity": -45}, {"type": "restock", "quantity": 0}] },
+      { "date": "2024-01-10", "stock": 98, "changes": [{"type": "sale", "quantity": -52}, {"type": "restock", "quantity": 30}] },
+      { "date": "2024-01-11", "stock": 76, "changes": [{"type": "sale", "quantity": -48}, {"type": "restock", "quantity": 0}] },
+      { "date": "2024-01-12", "stock": 58, "changes": [{"type": "sale", "quantity": -73}, {"type": "restock", "quantity": 55}] },
+      { "date": "2024-01-13", "stock": 42, "changes": [{"type": "sale", "quantity": -89}, {"type": "restock", "quantity": 18}] },
+      { "date": "2024-01-14", "stock": 34, "changes": [{"type": "sale", "quantity": -156}, {"type": "restock", "quantity": 148}] },
+      { "date": "2024-01-15", "stock": 12, "changes": [{"type": "sale", "quantity": -234}, {"type": "restock", "quantity": 212}] }
+    ],
+    "CHIPS_B": [
+      { "date": "2024-01-09", "stock": 89, "changes": [{"type": "sale", "quantity": -32}] },
+      { "date": "2024-01-10", "stock": 85, "changes": [{"type": "sale", "quantity": -28}] },
+      { "date": "2024-01-11", "stock": 81, "changes": [{"type": "sale", "quantity": -35}] },
+      { "date": "2024-01-12", "stock": 76, "changes": [{"type": "sale", "quantity": -41}] },
+      { "date": "2024-01-13", "stock": 71, "changes": [{"type": "sale", "quantity": -38}] },
+      { "date": "2024-01-14", "stock": 67, "changes": [{"type": "sale", "quantity": -44}] },
+      { "date": "2024-01-15", "stock": 62, "changes": [{"type": "sale", "quantity": -52}] }
+    ],
+    "CEREAL_X": [
+      { "date": "2024-01-09", "stock": 45, "changes": [{"type": "sale", "quantity": -18}] },
+      { "date": "2024-01-10", "stock": 42, "changes": [{"type": "sale", "quantity": -22}] },
+      { "date": "2024-01-11", "stock": 39, "changes": [{"type": "sale", "quantity": -19}] },
+      { "date": "2024-01-12", "stock": 35, "changes": [{"type": "sale", "quantity": -25}] },
+      { "date": "2024-01-13", "stock": 31, "changes": [{"type": "sale", "quantity": -23}] },
+      { "date": "2024-01-14", "stock": 28, "changes": [{"type": "sale", "quantity": -28}] },
+      { "date": "2024-01-15", "stock": 23, "changes": [{"type": "sale", "quantity": -31}] }
+    ],
+    "SODA_COLA": [
+      { "date": "2024-01-09", "stock": 245, "changes": [{"type": "sale", "quantity": -95}] },
+      { "date": "2024-01-10", "stock": 223, "changes": [{"type": "sale", "quantity": -102}, {"type": "restock", "quantity": 80}] },
+      { "date": "2024-01-11", "stock": 201, "changes": [{"type": "sale", "quantity": -87}, {"type": "restock", "quantity": 65}] },
+      { "date": "2024-01-12", "stock": 179, "changes": [{"type": "sale", "quantity": -118}, {"type": "restock", "quantity": 96}] },
+      { "date": "2024-01-13", "stock": 157, "changes": [{"type": "sale", "quantity": -134}, {"type": "restock", "quantity": 112}] },
+      { "date": "2024-01-14", "stock": 135, "changes": [{"type": "sale", "quantity": -145}, {"type": "restock", "quantity": 123}] },
+      { "date": "2024-01-15", "stock": 89, "changes": [{"type": "sale", "quantity": -167}, {"type": "restock", "quantity": 121}] }
+    ]
+  },
+  "transactions": [
+    {
+      "id": "TXN001", 
+      "timestamp": "2024-01-15T14:22:15Z",
+      "storeId": "102",
+      "items": [
+        { "skuId": "CHIPS_A", "quantity": 2, "price": 3.99, "total": 7.98 }
+      ],
+      "subtotal": 7.98,
+      "tax": 0.64,
+      "total": 8.62,
+      "paymentMethod": "credit_card",
+      "customerId": null
+    },
+    {
+      "id": "TXN002",
+      "timestamp": "2024-01-15T14:25:33Z", 
+      "storeId": "102",
+      "items": [
+        { "skuId": "CHIPS_A", "quantity": 1, "price": 3.99, "total": 3.99 },
+        { "skuId": "SODA_COLA", "quantity": 3, "price": 2.49, "total": 7.47 }
+      ],
+      "subtotal": 11.46,
+      "tax": 0.92,
+      "total": 12.38,
+      "paymentMethod": "cash",
+      "customerId": "CUST12345"
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "storeLayouts": [
+    {
+      "storeId": "102",
+      "layout": "standard_format", 
+      "totalAisles": 12,
+      "lastUpdated": "2024-01-10T09:00:00Z",
+      "aisles": [
+        {
+          "aisleId": "A01",
+          "name": "Beverages",
+          "sections": ["A", "B", "C", "D"],
+          "totalShelves": 48,
+          "category": "Beverages"
+        },
+        {
+          "aisleId": "A02", 
+          "name": "Breakfast & Cereals",
+          "sections": ["A", "B", "C"],
+          "totalShelves": 36,
+          "category": "Breakfast"
+        },
+        {
+          "aisleId": "A03",
+          "name": "Snacks & Confectionery",
+          "sections": ["A", "B", "C", "D"],
+          "totalShelves": 52,
+          "category": "Snacks"
+        }
+      ]
+    }
+  ],
+  "planogramData": [
+    {
+      "storeId": "102",
+      "skuId": "CHIPS_A",
+      "aisleId": "A03",
+      "section": "A",
+      "shelf": 2,
+      "position": 1,
+      "currentFacings": 4,
+      "maxFacings": 8,
+      "recommendedFacings": 6,
+      "category": "Snacks",
+      "subcategory": "Potato Chips",
+      "lastUpdated": "2024-01-15T14:30:00Z",
+      "performance": {
+        "salesPerFacing": 17.5,
+        "turnoverRate": 2.3,
+        "profitPerSqFt": 145.80
+      },
+      "dimensions": {
+        "facingWidth": 15,
+        "facingDepth": 25,
+        "facingHeight": 20
+      }
+    },
+    {
+      "storeId": "102",
+      "skuId": "CHIPS_B", 
+      "aisleId": "A03",
+      "section": "A",
+      "shelf": 2,
+      "position": 2,
+      "currentFacings": 3,
+      "maxFacings": 6, 
+      "recommendedFacings": 4,
+      "category": "Snacks",
+      "subcategory": "Potato Chips",
+      "lastUpdated": "2024-01-15T14:30:00Z",
+      "performance": {
+        "salesPerFacing": 12.8,
+        "turnoverRate": 1.9,
+        "profitPerSqFt": 128.50
+      },
+      "dimensions": {
+        "facingWidth": 15,
+        "facingDepth": 25,
+        "facingHeight": 20
+      }
+    },
+    {
+      "storeId": "102",
+      "skuId": "CEREAL_X",
+      "aisleId": "A02",
+      "section": "B", 
+      "shelf": 3,
+      "position": 4,
+      "currentFacings": 2,
+      "maxFacings": 4,
+      "recommendedFacings": 3,
+      "category": "Breakfast",
+      "subcategory": "Cereals",
+      "lastUpdated": "2024-01-15T14:30:00Z",
+      "performance": {
+        "salesPerFacing": 11.2,
+        "turnoverRate": 1.6,
+        "profitPerSqFt": 95.40
+      },
+      "dimensions": {
+        "facingWidth": 18,
+        "facingDepth": 30,
+        "facingHeight": 25
+      }
+    },
+    {
+      "storeId": "102",
+      "skuId": "SODA_COLA",
+      "aisleId": "A01",
+      "section": "B",
+      "shelf": 1, 
+      "position": 3,
+      "currentFacings": 8,
+      "maxFacings": 12,
+      "recommendedFacings": 10,
+      "category": "Beverages",
+      "subcategory": "Soft Drinks",
+      "lastUpdated": "2024-01-15T14:30:00Z",
+      "performance": {
+        "salesPerFacing": 18.9,
+        "turnoverRate": 3.1,
+        "profitPerSqFt": 189.70
+      },
+      "dimensions": {
+        "facingWidth": 6,
+        "facingDepth": 12,
+        "facingHeight": 15
+      }
+    }
+  ],
+  "categoryPerformance": [
+    {
+      "storeId": "102",
+      "category": "Snacks", 
+      "aisleId": "A03",
+      "totalFacings": 52,
+      "utilizedFacings": 48,
+      "utilizationRate": 92.3,
+      "avgSalesPerFacing": 15.2,
+      "avgTurnover": 2.1,
+      "totalRevenue": 8450.30,
+      "profitMargin": 42.1,
+      "lastAnalyzed": "2024-01-15T14:30:00Z",
+      "recommendations": [
+        "Increase Chips A facings by 2 during promotion period",
+        "Consider end-cap display for high-performing items",
+        "Monitor weekend performance for capacity planning"
+      ]
+    },
+    {
+      "storeId": "102", 
+      "category": "Breakfast",
+      "aisleId": "A02", 
+      "totalFacings": 36,
+      "utilizedFacings": 32,
+      "utilizationRate": 88.9,
+      "avgSalesPerFacing": 9.8,
+      "avgTurnover": 1.4,
+      "totalRevenue": 3920.15,
+      "profitMargin": 38.7,
+      "lastAnalyzed": "2024-01-15T14:30:00Z",
+      "recommendations": [
+        "Increase Cereal X visibility with eye-level placement",
+        "Bundle promotions show 25% lift in category sales",
+        "Consider seasonal breakfast items for Q1"
+      ]
+    },
+    {
+      "storeId": "102",
+      "category": "Beverages",
+      "aisleId": "A01",
+      "totalFacings": 48,
+      "utilizedFacings": 46,
+      "utilizationRate": 95.8, 
+      "avgSalesPerFacing": 16.7,
+      "avgTurnover": 2.8,
+      "totalRevenue": 12340.85,
+      "profitMargin": 45.3,
+      "lastAnalyzed": "2024-01-15T14:30:00Z",
+      "recommendations": [
+        "High utilization - consider expansion options",
+        "Cold beverage section performing above average", 
+        "Premium positioning strategy showing good results"
+      ]
+    }
+  ],
+  "shelfOptimization": [
+    {
+      "storeId": "102",
+      "aisleId": "A03",
+      "section": "A",
+      "optimization": {
+        "type": "promotion_boost",
+        "description": "Temporary facing increase for BOGO promotion", 
+        "effectiveDate": "2024-01-15T00:00:00Z",
+        "expiryDate": "2024-01-21T23:59:59Z",
+        "changes": [
+          {
+            "skuId": "CHIPS_A",
+            "currentFacings": 4,
+            "tempFacings": 6,
+            "reason": "BOGO promotion expects 65% sales lift"
+          }
+        ],
+        "expectedImpact": {
+          "salesIncrease": 180,
+          "revenueIncrease": 718.20,
+          "additionalSpaceRequired": 30
+        }
+      }
+    },
+    {
+      "storeId": "102", 
+      "aisleId": "A02",
+      "section": "B",
+      "optimization": {
+        "type": "performance_adjustment",
+        "description": "Increase facings for underperforming high-margin item",
+        "effectiveDate": "2024-01-16T00:00:00Z", 
+        "changes": [
+          {
+            "skuId": "CEREAL_X",
+            "currentFacings": 2,
+            "newFacings": 3,
+            "reason": "High margin item with growth potential"
+          }
+        ],
+        "expectedImpact": {
+          "salesIncrease": 45,
+          "revenueIncrease": 269.55,
+          "marginImprovement": 8.2
+        }
+      }
+    }
+  ],
+  "competitorBenchmarks": [
+    {
+      "category": "Snacks",
+      "industryAvg": {
+        "facingsPerSku": 3.2,
+        "salesPerFacing": 14.5,
+        "turnoverRate": 2.0,
+        "profitPerSqFt": 135.00
+      },
+      "ourPerformance": {
+        "facingsPerSku": 3.5,
+        "salesPerFacing": 15.2,
+        "turnoverRate": 2.1, 
+        "profitPerSqFt": 145.80
+      },
+      "variance": {
+        "facingsPerSku": "+9.4%",
+        "salesPerFacing": "+4.8%",
+        "turnoverRate": "+5.0%",
+        "profitPerSqFt": "+8.0%"
+      }
+    }
+  ]
+}

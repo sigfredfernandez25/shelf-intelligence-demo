@@ -1,5 +1,8 @@
 import { TaskInput, TaskOutput, Task } from '../types';
-import { getProduct, addTask, updateTask, getTasksBySKU, generateTaskId, mockTasks } from '../data/mockDatabase';
+import { getProduct, addTask, updateTask, getTasksBySKU, generateTaskId, getTasks } from '../data/serverDatabase';
+
+// Get tasks for compatibility
+const mockTasks = getTasks();
 
 /**
  * Task Orchestrator Agent

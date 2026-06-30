@@ -1,12 +1,73 @@
-import React, { useState } from 'react';
-import { products, substitutions } from '../data/mockData';
+import React, { useState, useEffect } from 'react';
+import { getProducts, substitutions } from '../data/mockData';
 
 const SKUDetail = ({ sku, onBack, onGenerateRecommendation }) => {
   const [showSubstitution, setShowSubstitution] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [product, setProduct] = useState(null);
+  const [substitution, setSubstitution] = useState(null);
+  const [productLoading, setProductLoading] = useState(true);
   
-  const product = products.find(p => p.id === sku);
-  const substitution = substitutions.find(s => s.originalSKU === sku);
+  // Load product data dynamically
+  useEffect(() => {
+    const loadProductData = async () => {
+      try {
+        setProductLoading(true);
+        
+        // Get fresh product data
+        const products = getProducts();
+        const foundProduct = products.find(p => p.id === sku);
+        
+        if (foundProduct) {
+          setProduct(foundProduct);
+          
+          // Find substitution data
+          const foundSubstitution = substitutions.find(s => s.originalSKU === sku);
+          setSubstitution(foundSubstitution);
+        } else {
+          console.error(`Product ${sku} not found in products list`);
+          // Try to fetch from API as fallback
+          try {
+            const response = await fetch(`/api/sku/${sku}?storeId=102`);
+            if (response.ok) {
+              const apiData = await response.json();
+              setProduct(apiData.product);
+            }
+          } catch (apiError) {
+            console.error('Failed to fetch product from API:', apiError);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading product data:', error);
+      } finally {
+        setProductLoading(false);
+      }
+    };
+
+    if (sku) {
+      loadProductData();
+    }
+  }, [sku]);
+
+  if (productLoading) {
+    return (
+      <div className="dashboard">
+        <div style={{ marginBottom: '24px' }}>
+          <button className="btn btn-outline" onClick={onBack}>
+            ← Back to Dashboard
+          </button>
+        </div>
+        <div className="card">
+          <div className="card-content">
+            <div style={{ textAlign: 'center', padding: '40px' }}>
+              <div className="loading-spinner" style={{ margin: '0 auto 16px' }}></div>
+              <div>Loading product details...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (

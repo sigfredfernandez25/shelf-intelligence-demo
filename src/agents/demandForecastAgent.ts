@@ -1,5 +1,5 @@
 import { ForecastInput, ForecastOutput, RiskLevel } from '../types';
-import { getProduct, getSalesHistory } from '../data/mockDatabase';
+import { getProduct, getSalesHistory } from '../data/serverDatabase';
 
 /**
  * Demand Forecast Agent
@@ -27,15 +27,16 @@ export class DemandForecastAgent {
     
     // Apply promotion lift if active
     let adjustedVelocity = avgDailySales / 24; // Convert to hourly
-    if (product.promotion?.active) {
+    if (product.promotion?.active && product.promotion.lift) {
       adjustedVelocity *= (1 + product.promotion.lift / 100);
     }
 
     // Calculate runout time
-    const runoutHours = product.currentStock / adjustedVelocity;
+    const currentStock = product.currentStock || 0;
+    const runoutHours = currentStock / adjustedVelocity;
     
     // Determine risk level
-    const riskLevel = this.calculateRiskLevel(runoutHours, product.currentStock);
+    const riskLevel = this.calculateRiskLevel(runoutHours, currentStock);
     
     // Calculate confidence based on data quality and trends
     const confidence = this.calculateConfidence(salesHistory, product);

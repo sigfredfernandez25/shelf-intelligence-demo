@@ -1,5 +1,5 @@
 import { PlanogramInput, PlanogramOutput, RiskLevel } from '../types';
-import { getProduct, getPlanogramData } from '../data/mockDatabase';
+import { getProduct, getPlanogramData } from '../data/serverDatabase';
 
 /**
  * Planogram Agent
@@ -18,7 +18,13 @@ export class PlanogramAgent {
 
     const planogramData = getPlanogramData(skuId);
     if (!planogramData) {
-      throw new Error(`Planogram data not found for ${skuId}`);
+      // Return default values if no planogram data exists
+      return {
+        currentFacings: 3,
+        recommendedFacings: this.calculateOptimalFacings(3, 6, riskLevel, product),
+        reasoning: `No existing planogram data for ${product.name}. Recommendations based on category defaults.`,
+        shelfOptimization: "Establish initial planogram positioning based on product category and risk assessment."
+      };
     }
 
     const { currentFacings, maxFacings, category } = planogramData;

@@ -1,0 +1,225 @@
+{
+  "stores": [
+    {
+      "id": "102",
+      "name": "Store #102 - Downtown",
+      "status": "active",
+      "location": "Downtown Plaza",
+      "address": "123 Main Street, Downtown",
+      "manager": "Sarah Johnson",
+      "phone": "(555) 123-4567",
+      "timezone": "America/New_York",
+      "openHours": "06:00-22:00"
+    },
+    {
+      "id": "103",
+      "name": "Store #103 - Mall",
+      "status": "active",
+      "location": "Westfield Mall",
+      "address": "456 Mall Avenue, West Side",
+      "manager": "Mike Chen",
+      "phone": "(555) 234-5678",
+      "timezone": "America/New_York",
+      "openHours": "10:00-21:00"
+    },
+    {
+      "id": "104",
+      "name": "Store #104 - Suburban",
+      "status": "active",
+      "location": "Oak Ridge Center",
+      "address": "789 Oak Street, Suburbs",
+      "manager": "Lisa Rodriguez",
+      "phone": "(555) 345-6789",
+      "timezone": "America/New_York",
+      "openHours": "07:00-23:00"
+    }
+  ],
+  "products": [
+    {
+      "id": "CHIPS_A",
+      "name": "Premium Chips A",
+      "brand": "Premium Snacks Co",
+      "category": "Snacks",
+      "subcategory": "Potato Chips",
+      "barcode": "012345678901",
+      "image": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkY2NzAwIiByeD0iMTAiLz4KPHRleHQgeD0iNTAiIHk9IjU1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DaGlwcyBBPC90ZXh0Pgo8L3N2Zz4=",
+      "price": 3.99,
+      "cost": 2.4,
+      "margin": 39.8,
+      "weight": "150g",
+      "dimensions": {
+        "length": 20,
+        "width": 15,
+        "height": 25
+      },
+      "nutritionalInfo": {
+        "calories": 150,
+        "fat": "10g",
+        "sodium": "170mg"
+      },
+      "allergens": [
+        "None"
+      ],
+      "supplier": "Premium Snacks Co",
+      "supplierId": "SUP001"
+    },
+    {
+      "id": "CHIPS_B",
+      "name": "Premium Chips B",
+      "brand": "Premium Snacks Co",
+      "category": "Snacks",
+      "subcategory": "Potato Chips",
+      "barcode": "012345678902",
+      "image": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMDA3Q0ZGIiByeD0iMTAiLz4KPHRleHQgeD0iNTAiIHk9IjU1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DaGlwcyBCPC90ZXh0Pgo8L3N2Zz4=",
+      "price": 4.29,
+      "cost": 2.5,
+      "margin": 41.7,
+      "weight": "150g",
+      "dimensions": {
+        "length": 20,
+        "width": 15,
+        "height": 25
+      },
+      "nutritionalInfo": {
+        "calories": 160,
+        "fat": "11g",
+        "sodium": "180mg"
+      },
+      "allergens": [
+        "None"
+      ],
+      "supplier": "Premium Snacks Co",
+      "supplierId": "SUP001"
+    },
+    {
+      "id": "CEREAL_X",
+      "name": "Breakfast Cereal X",
+      "brand": "Morning Fresh",
+      "category": "Breakfast",
+      "subcategory": "Cereals",
+      "barcode": "012345678903",
+      "image": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkZENzAwIiByeD0iMTAiLz4KPHRleHQgeD0iNTAiIHk9IjU1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9ImJsYWNrIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5DZXJlYWwgWDwvdGV4dD4KPC9zdmc+",
+      "price": 5.99,
+      "cost": 3.2,
+      "margin": 46.6,
+      "weight": "400g",
+      "dimensions": {
+        "length": 25,
+        "width": 18,
+        "height": 30
+      },
+      "nutritionalInfo": {
+        "calories": 110,
+        "fat": "1g",
+        "sodium": "160mg",
+        "fiber": "3g"
+      },
+      "allergens": [
+        "Gluten"
+      ],
+      "supplier": "Morning Fresh Co",
+      "supplierId": "SUP002"
+    },
+    {
+      "id": "SODA_COLA",
+      "name": "Premium Cola",
+      "brand": "Fresh Drinks",
+      "category": "Beverages",
+      "subcategory": "Soft Drinks",
+      "barcode": "012345678904",
+      "image": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjODUxNjIzIiByeD0iMTAiLz4KPHRleHQgeD0iNTAiIHk9IjU1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5Db2xhPC90ZXh0Pgo8L3N2Zz4=",
+      "price": 2.49,
+      "cost": 1.2,
+      "margin": 51.8,
+      "weight": "330ml",
+      "dimensions": {
+        "length": 6,
+        "width": 6,
+        "height": 12
+      },
+      "nutritionalInfo": {
+        "calories": 140,
+        "fat": "0g",
+        "sodium": "40mg",
+        "sugar": "39g"
+      },
+      "allergens": [
+        "None"
+      ],
+      "supplier": "Fresh Drinks Co",
+      "supplierId": "SUP003"
+    }
+  ],
+  "inventory": [
+    {
+      "storeId": "102",
+      "skuId": "CHIPS_A",
+      "currentStock": 74,
+      "backroomStock": 5,
+      "shelfCapacity": 48,
+      "minimumStock": 12,
+      "maximumStock": 96,
+      "reorderPoint": 20,
+      "lastRestocked": "2024-01-14T10:30:00Z",
+      "lastUpdated": "2026-06-30T08:42:28.223Z"
+    },
+    {
+      "storeId": "102",
+      "skuId": "CHIPS_B",
+      "currentStock": 67,
+      "backroomStock": 24,
+      "shelfCapacity": 48,
+      "minimumStock": 15,
+      "maximumStock": 96,
+      "reorderPoint": 25,
+      "lastRestocked": "2024-01-13T09:15:00Z",
+      "lastUpdated": "2024-01-15T14:22:00Z"
+    },
+    {
+      "storeId": "102",
+      "skuId": "CEREAL_X",
+      "currentStock": 23,
+      "backroomStock": 12,
+      "shelfCapacity": 36,
+      "minimumStock": 8,
+      "maximumStock": 72,
+      "reorderPoint": 18,
+      "lastRestocked": "2024-01-12T16:45:00Z",
+      "lastUpdated": "2024-01-15T14:22:00Z"
+    },
+    {
+      "storeId": "102",
+      "skuId": "SODA_COLA",
+      "currentStock": 89,
+      "backroomStock": 36,
+      "shelfCapacity": 120,
+      "minimumStock": 30,
+      "maximumStock": 240,
+      "reorderPoint": 50,
+      "lastRestocked": "2024-01-14T11:20:00Z",
+      "lastUpdated": "2024-01-15T14:22:00Z"
+    }
+  ],
+  "substitutionMatrix": [
+    {
+      "originalSKU": "CHIPS_A",
+      "substituteSKU": "CHIPS_B",
+      "acceptanceRate": 78,
+      "marginImpact": 10,
+      "expectedRecovery": 85,
+      "reason": "Same brand family with higher margin and similar taste profile",
+      "priority": 1,
+      "active": true
+    },
+    {
+      "originalSKU": "CEREAL_X",
+      "substituteSKU": "CEREAL_Y",
+      "acceptanceRate": 62,
+      "marginImpact": 5,
+      "expectedRecovery": 72,
+      "reason": "Similar nutritional profile and price point",
+      "priority": 1,
+      "active": false
+    }
+  ]
+}

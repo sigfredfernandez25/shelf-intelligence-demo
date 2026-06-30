@@ -1,5 +1,5 @@
 import { ReplenishmentInput, ReplenishmentOutput, Task } from '../types';
-import { getProduct, addTask, generateTaskId } from '../data/mockDatabase';
+import { getProduct, addTask, generateTaskId } from '../data/serverDatabase';
 
 /**
  * Replenishment Agent
@@ -17,7 +17,7 @@ export class ReplenishmentAgent {
     }
 
     // Check backroom availability
-    const backroomStock = product.backroomStock;
+    const backroomStock = product.backroomStock || 0;
     
     if (backroomStock === 0) {
       // No stock available - trigger substitution workflow
@@ -142,7 +142,7 @@ export class ReplenishmentAgent {
     const targetStock = Math.ceil(salesVelocity * 24 * targetDaysSupply); // Convert to daily then multiply
     
     // Don't exceed shelf capacity
-    const maxRestock = product.shelfCapacity - currentStock;
+    const maxRestock = (product.shelfCapacity || 48) - currentStock;
     const optimalQuantity = Math.min(targetStock - currentStock, maxRestock);
     
     // Ensure minimum economic order quantity
@@ -159,7 +159,7 @@ export class ReplenishmentAgent {
     const product = getProduct(skuId);
     if (!product) throw new Error(`Product ${skuId} not found`);
 
-    const availableCapacity = product.shelfCapacity - product.currentStock;
+    const availableCapacity = (product.shelfCapacity || 48) - (product.currentStock || 0);
     const canRestock = quantity <= availableCapacity;
 
     return {
