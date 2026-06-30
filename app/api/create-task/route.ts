@@ -34,9 +34,9 @@ export async function POST(request: NextRequest) {
     if (!result.success) {
       return NextResponse.json(
         { 
-          error: result.error,
-          agentsExecuted: result.agentsExecuted,
-          executionTime: result.executionTime
+          error: result.error || 'Task creation failed',
+          agentsExecuted: result.agentsExecuted || [],
+          executionTime: result.executionTime || 0
         }, 
         { status: 500 }
       );
@@ -52,8 +52,9 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
+    console.error('Create task API error:', error);
     return NextResponse.json(
-      { error: `Create task API error: ${error}` },
+      { error: `Create task API error: ${error instanceof Error ? error.message : 'Unknown error'}` },
       { status: 500 }
     );
   }

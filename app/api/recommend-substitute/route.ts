@@ -26,9 +26,9 @@ export async function POST(request: NextRequest) {
     if (!result.success) {
       return NextResponse.json(
         { 
-          error: result.error,
-          agentsExecuted: result.agentsExecuted,
-          executionTime: result.executionTime
+          error: result.error || 'Recommendation generation failed',
+          agentsExecuted: result.agentsExecuted || [],
+          executionTime: result.executionTime || 0
         }, 
         { status: 500 }
       );
@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     if (!result.data) {
       return NextResponse.json({
         recommendation: null,
-        message: 'No suitable substitute found',
+        message: 'No suitable substitute found for this product',
         metadata: {
           agentsExecuted: result.agentsExecuted,
           executionTime: result.executionTime,
@@ -57,8 +57,9 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
+    console.error('Recommendation API error:', error);
     return NextResponse.json(
-      { error: `Recommendation API error: ${error}` },
+      { error: `Recommendation API error: ${error instanceof Error ? error.message : 'Unknown error'}` },
       { status: 500 }
     );
   }

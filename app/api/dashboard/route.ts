@@ -19,9 +19,9 @@ export async function GET(request: NextRequest) {
     if (!result.success) {
       return NextResponse.json(
         { 
-          error: result.error,
-          agentsExecuted: result.agentsExecuted,
-          executionTime: result.executionTime
+          error: result.error || 'Dashboard generation failed',
+          agentsExecuted: result.agentsExecuted || [],
+          executionTime: result.executionTime || 0
         }, 
         { status: 500 }
       );
@@ -38,8 +38,9 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error) {
+    console.error('Dashboard API error:', error);
     return NextResponse.json(
-      { error: `Dashboard API error: ${error}` },
+      { error: `Dashboard API error: ${error instanceof Error ? error.message : 'Unknown error'}` },
       { status: 500 }
     );
   }

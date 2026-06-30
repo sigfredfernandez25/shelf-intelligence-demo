@@ -22,14 +22,14 @@ export async function POST(request: NextRequest) {
     };
 
     const result = await orchestrator.executeAgent('forecast', { storeId, skuId }, context);
-    
+
     if (!result.success) {
       return NextResponse.json(
-        { 
-          error: result.error,
-          agentsExecuted: result.agentsExecuted,
-          executionTime: result.executionTime
-        }, 
+        {
+          error: result.error || 'Forecast generation failed',
+          agentsExecuted: result.agentsExecuted || [],
+          executionTime: result.executionTime || 0
+        },
         { status: 500 }
       );
     }
@@ -44,8 +44,9 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
+    console.error('Forecast API error:', error);
     return NextResponse.json(
-      { error: `Forecast API error: ${error}` },
+      { error: `Forecast API error: ${error instanceof Error ? error.message : 'Unknown error'}` },
       { status: 500 }
     );
   }
